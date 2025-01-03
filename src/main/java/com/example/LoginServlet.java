@@ -13,10 +13,12 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Define constants for repetitive literals
+    // Constants
     private static final String TEXT_HTML = "text/html";
     private static final String BODY_HTML_END = "</body></html>";
     private static final String USERNAME = "username";
+    private static final String ERROR_GENERATING_RESPONSE = "Error generating response";
+    private static final String REDIRECTION_FAILED = "Redirection failed";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<button type='submit' id='loginButton'>Login</button>");
             out.println(BODY_HTML_END);
         } catch (IOException e) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error generating response");
+            handleSendError(response, ERROR_GENERATING_RESPONSE);
         }
     }
 
@@ -47,7 +49,7 @@ public class LoginServlet extends HttpServlet {
             try {
                 response.sendRedirect("dashboard");
             } catch (IOException e) {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Redirection failed");
+                handleSendError(response, REDIRECTION_FAILED);
             }
         } else {
             response.setContentType(TEXT_HTML);
@@ -57,7 +59,7 @@ public class LoginServlet extends HttpServlet {
                 out.println("<a href='login'>Go back to Login</a>");
                 out.println(BODY_HTML_END);
             } catch (IOException e) {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error generating response");
+                handleSendError(response, ERROR_GENERATING_RESPONSE);
             }
         }
     }
@@ -78,15 +80,27 @@ public class LoginServlet extends HttpServlet {
                     out.println("<p>Hello, " + session.getAttribute(USERNAME) + "!</p>");
                     out.println(BODY_HTML_END);
                 } else {
-                    try {
-                        response.sendRedirect("login");
-                    } catch (IOException e) {
-                        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Redirection failed");
-                    }
+                    redirectToLogin(response);
                 }
             } catch (IOException e) {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error generating response");
+                handleSendError(response, ERROR_GENERATING_RESPONSE);
             }
+        }
+    }
+
+    private void redirectToLogin(HttpServletResponse response) {
+        try {
+            response.sendRedirect("login");
+        } catch (IOException e) {
+            handleSendError(response, REDIRECTION_FAILED);
+        }
+    }
+
+    private void handleSendError(HttpServletResponse response, String errorMessage) {
+        try {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, errorMessage);
+        } catch (IOException e) {
+            log("Failed to send error response: " + errorMessage, e);
         }
     }
 }
