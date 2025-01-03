@@ -1,9 +1,6 @@
 package com.example;
 
-import com.example.LoginServlet;
-
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,10 +9,10 @@ import java.io.PrintWriter;
 
 import static org.mockito.Mockito.*;
 
-public class LoginServletTest {
+class LoginServletTest {
 
     @Test
-    public void testDoPost_validCredentials() throws Exception {
+    void testDoPost_validCredentials() throws Exception {
         // Mock objects
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
@@ -38,7 +35,7 @@ public class LoginServletTest {
     }
 
     @Test
-    public void testDoPost_invalidCredentials() throws Exception {
+    void testDoPost_invalidCredentials() throws Exception {
         // Mock objects
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
