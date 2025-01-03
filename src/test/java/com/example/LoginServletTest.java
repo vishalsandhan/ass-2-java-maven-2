@@ -11,10 +11,10 @@ import java.io.PrintWriter;
 
 import static org.mockito.Mockito.*;
 
-public class LoginServletTest {
+class LoginServletTest {
 
     @Test
-    public void testDoPost_validCredentials() throws Exception {
+    void testDoPost_validCredentials() throws Exception {
         // Mock objects
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
