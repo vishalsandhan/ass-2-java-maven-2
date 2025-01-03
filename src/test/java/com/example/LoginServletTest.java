@@ -1,7 +1,5 @@
 package com.example;
 
-import com.example.LoginServlet;
-
 import org.junit.jupiter.api.Test;
 
 import javax.servlet.http.HttpServletRequest;
