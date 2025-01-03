@@ -3,7 +3,6 @@ package com.example;
 import com.example.LoginServlet;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
