@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     @WebServlet("/dashboard")
-    public static class DashboardServlet extends HttpServlet {
+    public class DashboardServlet extends HttpServlet {
         private static final long serialVersionUID = 1L;
 
         @Override
