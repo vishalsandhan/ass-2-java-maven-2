@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'sonarmaven' // Ensure this matches the Maven installation name in Jenkins
+        maven 'sonarmaven' 
     }
     environment {
         // SONAR_SCANNER_PATH = 'C:\\Users\\91844\\Downloads\\sonar-scanner-cli-6.2.1.4610-windows-x64\\sonar-scanner-6.2.1.4610-windows-x64\\bin\\sonar-scanner.bat'
@@ -13,7 +13,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // git branch: 'main', url: 'https://github.com/Siddhant40/java-maven.git' // Replace with your GitHub repository URL
                 checkout scm
             }
         }
