@@ -41,13 +41,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("dashboard");
         } else {
             response.setContentType("text/html");
-            try {
-             PrintWriter out = response.getWriter();
-  }
-  catch (UnknownHostException ex) {  // Compliant
-    out.println(ex);
-  }
-            
+            PrintWriter out = response.getWriter();
             out.println("<html><head><title>Login Page</title></head><body>");
             out.println("<h1>Invalid credentials, please try again.</h1>");
             out.println("<a href='login'>Go back to Login</a>");
@@ -71,13 +65,7 @@ public class LoginServlet extends HttpServlet {
                 out.println("<p>Hello, " + session.getAttribute("username") + "!</p>");
                 out.println("</body></html>");
             } else {
-                try {
-             response.sendRedirect("login");
-  }
-  catch (UnknownHostException ex) {  // Compliant
-    out.println(ex);
-  }
-               
+                response.sendRedirect("login");
             }
         }
     }
